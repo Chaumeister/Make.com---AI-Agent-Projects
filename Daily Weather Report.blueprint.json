@@ -1,0 +1,205 @@
+{
+    "name": "Integration Weather, Gmail",
+    "flow": [
+        {
+            "id": 1,
+            "module": "weather:ActionGetCurrentWeather",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "city": "Vestal, USA",
+                "type": "name"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0
+                },
+                "restore": {
+                    "expect": {
+                        "type": {
+                            "label": "cities"
+                        }
+                    }
+                },
+                "expect": [
+                    {
+                        "name": "type",
+                        "type": "select",
+                        "label": "I want to enter a location by",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "name",
+                                "coords"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "city",
+                        "type": "text",
+                        "label": "City",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "module": "google-email:ActionSendEmail",
+            "version": 2,
+            "parameters": {
+                "account": 5417164
+            },
+            "mapper": {
+                "cc": [],
+                "to": [
+                    "mchau4@binghamton.edu"
+                ],
+                "bcc": [],
+                "from": "",
+                "html": "<p>Good morning! For today's date, the temperature in Celsius is: {{1.temperature}}</p>\n<p>Air humdity is {{1.humidity}}</p>\n<p>Wind speed is: {{1.wind.speed}}</p>\n<p>Cloudiness levels is: {{1.clouds}}</p>\n<p>Status is: {{1.name}}</p>\n<p>Overall description is: {{1.description}}</p>",
+                "subject": "Daily Weather Report",
+                "attachments": []
+            },
+            "metadata": {
+                "designer": {
+                    "x": 423,
+                    "y": -5
+                },
+                "restore": {
+                    "expect": {
+                        "cc": {
+                            "mode": "chose"
+                        },
+                        "to": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        },
+                        "bcc": {
+                            "mode": "chose"
+                        },
+                        "attachments": {
+                            "mode": "chose"
+                        }
+                    },
+                    "parameters": {
+                        "account": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google-restricted"
+                            },
+                            "label": "My Google Restricted connection (mchau4@binghamton.edu)"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "account",
+                        "type": "account:google-restricted",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "from",
+                        "type": "text",
+                        "label": "From"
+                    },
+                    {
+                        "name": "to",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address",
+                            "required": true
+                        },
+                        "type": "array",
+                        "label": "To",
+                        "required": true
+                    },
+                    {
+                        "name": "subject",
+                        "type": "text",
+                        "label": "Subject"
+                    },
+                    {
+                        "name": "html",
+                        "type": "text",
+                        "label": "Content"
+                    },
+                    {
+                        "name": "attachments",
+                        "spec": [
+                            {
+                                "name": "fileName",
+                                "type": "filename",
+                                "label": "File name",
+                                "required": true,
+                                "semantic": "file:name"
+                            },
+                            {
+                                "name": "data",
+                                "type": "buffer",
+                                "label": "Data",
+                                "required": true,
+                                "semantic": "file:data"
+                            },
+                            {
+                                "name": "cid",
+                                "type": "text",
+                                "label": "Content-ID"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Attachments"
+                    },
+                    {
+                        "name": "cc",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address"
+                        },
+                        "type": "array",
+                        "label": "Copy recipient"
+                    },
+                    {
+                        "name": "bcc",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address"
+                        },
+                        "type": "array",
+                        "label": "Blind copy recipient"
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "us2.make.com",
+        "notes": []
+    }
+}
