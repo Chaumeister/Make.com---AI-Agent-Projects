@@ -1,0 +1,1015 @@
+{
+    "name": "Integration Google Sheets",
+    "flow": [
+        {
+            "id": 4,
+            "module": "google-sheets:filterRows",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 5416995
+            },
+            "mapper": {
+                "from": "drive",
+                "valueRenderOption": "FORMATTED_VALUE",
+                "dateTimeRenderOption": "FORMATTED_STRING",
+                "limit": "10",
+                "spreadsheetId": "1d6krySrehzJ_gaPhxVG66oPZ6IMgfk2VrnMzwcVGjpc",
+                "sheetId": "Sheet1",
+                "includesHeaders": true,
+                "tableFirstRow": "A1:Z1",
+                "sortOrder": "asc"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 6,
+                    "y": 1
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "label": "My Google connection (mchau4@binghamton.edu)",
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google"
+                            }
+                        }
+                    },
+                    "expect": {
+                        "from": {
+                            "label": "Select from My Drive"
+                        },
+                        "valueRenderOption": {
+                            "mode": "chose",
+                            "label": "Formatted value"
+                        },
+                        "dateTimeRenderOption": {
+                            "mode": "chose",
+                            "label": "Formatted string"
+                        },
+                        "spreadsheetId": {
+                            "mode": "chose",
+                            "label": "Club Events Calendar"
+                        },
+                        "sheetId": {
+                            "mode": "chose",
+                            "label": "Sheet1"
+                        },
+                        "includesHeaders": {
+                            "mode": "chose",
+                            "label": "Yes"
+                        },
+                        "tableFirstRow": {
+                            "label": "A-Z"
+                        },
+                        "orderBy": {
+                            "mode": "chose"
+                        },
+                        "sortOrder": {
+                            "mode": "chose",
+                            "label": "Ascending"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "from",
+                        "type": "select",
+                        "label": "Search Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "drive",
+                                "share"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "valueRenderOption",
+                        "type": "select",
+                        "label": "Value render option",
+                        "validate": {
+                            "enum": [
+                                "FORMATTED_VALUE",
+                                "UNFORMATTED_VALUE",
+                                "FORMULA"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "dateTimeRenderOption",
+                        "type": "select",
+                        "label": "Date and time render option",
+                        "validate": {
+                            "enum": [
+                                "SERIAL_NUMBER",
+                                "FORMATTED_STRING"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit"
+                    },
+                    {
+                        "name": "spreadsheetId",
+                        "type": "select",
+                        "label": "Spreadsheet ID",
+                        "required": true
+                    },
+                    {
+                        "name": "sheetId",
+                        "type": "select",
+                        "label": "Sheet Name",
+                        "required": true
+                    },
+                    {
+                        "name": "includesHeaders",
+                        "type": "select",
+                        "label": "Table contains headers",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                true,
+                                false
+                            ]
+                        }
+                    },
+                    {
+                        "name": "tableFirstRow",
+                        "type": "select",
+                        "label": "Column range",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "A1:Z1",
+                                "A1:BZ1",
+                                "A1:CZ1",
+                                "A1:DZ1",
+                                "A1:MZ1",
+                                "A1:ZZ1",
+                                "A1:AZZ1",
+                                "A1:BZZ1",
+                                "A1:CZZ1",
+                                "A1:DZZ1",
+                                "A1:MZZ1",
+                                "A1:ZZZ1"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "filter",
+                        "type": "filter",
+                        "label": "Filter",
+                        "options": "rpc://google-sheets/2/rpcGetFilterKeys?includesHeaders=true"
+                    },
+                    {
+                        "name": "orderBy",
+                        "type": "select",
+                        "label": "Order by"
+                    },
+                    {
+                        "name": "sortOrder",
+                        "type": "select",
+                        "label": "Sort order",
+                        "validate": {
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ]
+                        }
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "__IMTLENGTH__",
+                        "label": "Total number of bundles",
+                        "type": "uinteger"
+                    },
+                    {
+                        "name": "__IMTINDEX__",
+                        "label": "Bundle order position",
+                        "type": "uinteger"
+                    },
+                    {
+                        "name": "__ROW_NUMBER__",
+                        "label": "Row number",
+                        "type": "number"
+                    },
+                    {
+                        "name": "__SPREADSHEET_ID__",
+                        "label": "Spreadsheet ID",
+                        "type": "text"
+                    },
+                    {
+                        "name": "__SHEET__",
+                        "label": "Sheet",
+                        "type": "text"
+                    },
+                    {
+                        "name": "0",
+                        "label": "Event Name (A)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "1",
+                        "label": "Event Date (B)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "2",
+                        "label": "Event Time (C)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "3",
+                        "label": "Location (D)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "4",
+                        "label": "Description (E)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "5",
+                        "label": "Flyer URL (F)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "6",
+                        "label": "Notification Sent (G)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "7",
+                        "label": "(H)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "8",
+                        "label": "(I)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "9",
+                        "label": "(J)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "10",
+                        "label": "(K)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "11",
+                        "label": "(L)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "12",
+                        "label": "(M)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "13",
+                        "label": "(N)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "14",
+                        "label": "(O)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "15",
+                        "label": "(P)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "16",
+                        "label": "(Q)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "17",
+                        "label": "(R)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "18",
+                        "label": "(S)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "19",
+                        "label": "(T)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "20",
+                        "label": "(U)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "21",
+                        "label": "(V)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "22",
+                        "label": "(W)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "23",
+                        "label": "(X)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "24",
+                        "label": "(Y)",
+                        "type": "text"
+                    },
+                    {
+                        "name": "25",
+                        "label": "(Z)",
+                        "type": "text"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 11,
+            "module": "google-sheets:updateRow",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 5416995
+            },
+            "filter": {
+                "name": "",
+                "conditions": [
+                    [
+                        {
+                            "a": "{{parseDate(4.`1`; \"\"\"MM/DD/YYYY\"\"\")}}",
+                            "b": "{{addDays(now; 0)}}",
+                            "o": "number:greaterorequal"
+                        },
+                        {
+                            "a": "{{parseDate(4.`1`; \"\"\"MM/DD/YYYY\"\"\")}}",
+                            "b": "{{addDays(now; 7)}}",
+                            "o": "number:lessorequal"
+                        }
+                    ]
+                ]
+            },
+            "mapper": {
+                "mode": "select",
+                "valueInputOption": "USER_ENTERED",
+                "from": "drive",
+                "spreadsheetId": "/1fhcs0AyD-NTN5X5aeIUDZtM5ayxU38EY/1hRtmXdkQ5r852h_i831QHm-KWxzuZCMc/1d6krySrehzJ_gaPhxVG66oPZ6IMgfk2VrnMzwcVGjpc",
+                "sheetId": "Sheet1",
+                "rowNumber": "{{4.`__ROW_NUMBER__`}}",
+                "includesHeaders": true,
+                "values": {
+                    "6": "Yes"
+                }
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "label": "My Google connection (mchau4@binghamton.edu)",
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google"
+                            }
+                        }
+                    },
+                    "expect": {
+                        "mode": {
+                            "label": "Search by path"
+                        },
+                        "valueInputOption": {
+                            "mode": "chose",
+                            "label": "User entered"
+                        },
+                        "from": {
+                            "label": "My Drive"
+                        },
+                        "spreadsheetId": {
+                            "path": [
+                                "CLASS FOLDERS",
+                                "SCM 580F",
+                                "Club Events Calendar"
+                            ]
+                        },
+                        "sheetId": {
+                            "label": "Sheet1"
+                        },
+                        "includesHeaders": {
+                            "nested": [
+                                {
+                                    "name": "values",
+                                    "spec": [
+                                        {
+                                            "name": "0",
+                                            "type": "text",
+                                            "label": "Event Name (A)"
+                                        },
+                                        {
+                                            "name": "1",
+                                            "type": "text",
+                                            "label": "Event Date (B)"
+                                        },
+                                        {
+                                            "name": "2",
+                                            "type": "text",
+                                            "label": "Event Time (C)"
+                                        },
+                                        {
+                                            "name": "3",
+                                            "type": "text",
+                                            "label": "Location (D)"
+                                        },
+                                        {
+                                            "name": "4",
+                                            "type": "text",
+                                            "label": "Description (E)"
+                                        },
+                                        {
+                                            "name": "5",
+                                            "type": "text",
+                                            "label": "Flyer URL (F)"
+                                        },
+                                        {
+                                            "name": "6",
+                                            "type": "text",
+                                            "label": "Notification Sent (G)"
+                                        },
+                                        {
+                                            "name": "7",
+                                            "type": "text",
+                                            "label": "(H)"
+                                        },
+                                        {
+                                            "name": "8",
+                                            "type": "text",
+                                            "label": "(I)"
+                                        },
+                                        {
+                                            "name": "9",
+                                            "type": "text",
+                                            "label": "(J)"
+                                        },
+                                        {
+                                            "name": "10",
+                                            "type": "text",
+                                            "label": "(K)"
+                                        },
+                                        {
+                                            "name": "11",
+                                            "type": "text",
+                                            "label": "(L)"
+                                        },
+                                        {
+                                            "name": "12",
+                                            "type": "text",
+                                            "label": "(M)"
+                                        },
+                                        {
+                                            "name": "13",
+                                            "type": "text",
+                                            "label": "(N)"
+                                        },
+                                        {
+                                            "name": "14",
+                                            "type": "text",
+                                            "label": "(O)"
+                                        },
+                                        {
+                                            "name": "15",
+                                            "type": "text",
+                                            "label": "(P)"
+                                        },
+                                        {
+                                            "name": "16",
+                                            "type": "text",
+                                            "label": "(Q)"
+                                        },
+                                        {
+                                            "name": "17",
+                                            "type": "text",
+                                            "label": "(R)"
+                                        },
+                                        {
+                                            "name": "18",
+                                            "type": "text",
+                                            "label": "(S)"
+                                        },
+                                        {
+                                            "name": "19",
+                                            "type": "text",
+                                            "label": "(T)"
+                                        },
+                                        {
+                                            "name": "20",
+                                            "type": "text",
+                                            "label": "(U)"
+                                        },
+                                        {
+                                            "name": "21",
+                                            "type": "text",
+                                            "label": "(V)"
+                                        },
+                                        {
+                                            "name": "22",
+                                            "type": "text",
+                                            "label": "(W)"
+                                        },
+                                        {
+                                            "name": "23",
+                                            "type": "text",
+                                            "label": "(X)"
+                                        },
+                                        {
+                                            "name": "24",
+                                            "type": "text",
+                                            "label": "(Y)"
+                                        },
+                                        {
+                                            "name": "25",
+                                            "type": "text",
+                                            "label": "(Z)"
+                                        }
+                                    ],
+                                    "type": "collection",
+                                    "label": "Values"
+                                }
+                            ],
+                            "label": "Yes"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:google",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "mode",
+                        "type": "select",
+                        "label": "Search Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "select",
+                                "fromAll",
+                                "map"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "valueInputOption",
+                        "type": "select",
+                        "label": "Value input option",
+                        "validate": {
+                            "enum": [
+                                "USER_ENTERED",
+                                "RAW"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "from",
+                        "type": "select",
+                        "label": "Drive",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "drive",
+                                "share",
+                                "team"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "spreadsheetId",
+                        "type": "file",
+                        "label": "Spreadsheet ID",
+                        "required": true
+                    },
+                    {
+                        "name": "sheetId",
+                        "type": "select",
+                        "label": "Sheet Name",
+                        "required": true
+                    },
+                    {
+                        "name": "rowNumber",
+                        "type": "uinteger",
+                        "label": "Row number",
+                        "required": true
+                    },
+                    {
+                        "name": "includesHeaders",
+                        "type": "select",
+                        "label": "Table contains headers",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                true,
+                                false
+                            ]
+                        }
+                    },
+                    {
+                        "name": "values",
+                        "type": "collection",
+                        "label": "Values",
+                        "spec": [
+                            {
+                                "name": "0",
+                                "type": "text",
+                                "label": "Event Name (A)"
+                            },
+                            {
+                                "name": "1",
+                                "type": "text",
+                                "label": "Event Date (B)"
+                            },
+                            {
+                                "name": "2",
+                                "type": "text",
+                                "label": "Event Time (C)"
+                            },
+                            {
+                                "name": "3",
+                                "type": "text",
+                                "label": "Location (D)"
+                            },
+                            {
+                                "name": "4",
+                                "type": "text",
+                                "label": "Description (E)"
+                            },
+                            {
+                                "name": "5",
+                                "type": "text",
+                                "label": "Flyer URL (F)"
+                            },
+                            {
+                                "name": "6",
+                                "type": "text",
+                                "label": "Notification Sent (G)"
+                            },
+                            {
+                                "name": "7",
+                                "type": "text",
+                                "label": "(H)"
+                            },
+                            {
+                                "name": "8",
+                                "type": "text",
+                                "label": "(I)"
+                            },
+                            {
+                                "name": "9",
+                                "type": "text",
+                                "label": "(J)"
+                            },
+                            {
+                                "name": "10",
+                                "type": "text",
+                                "label": "(K)"
+                            },
+                            {
+                                "name": "11",
+                                "type": "text",
+                                "label": "(L)"
+                            },
+                            {
+                                "name": "12",
+                                "type": "text",
+                                "label": "(M)"
+                            },
+                            {
+                                "name": "13",
+                                "type": "text",
+                                "label": "(N)"
+                            },
+                            {
+                                "name": "14",
+                                "type": "text",
+                                "label": "(O)"
+                            },
+                            {
+                                "name": "15",
+                                "type": "text",
+                                "label": "(P)"
+                            },
+                            {
+                                "name": "16",
+                                "type": "text",
+                                "label": "(Q)"
+                            },
+                            {
+                                "name": "17",
+                                "type": "text",
+                                "label": "(R)"
+                            },
+                            {
+                                "name": "18",
+                                "type": "text",
+                                "label": "(S)"
+                            },
+                            {
+                                "name": "19",
+                                "type": "text",
+                                "label": "(T)"
+                            },
+                            {
+                                "name": "20",
+                                "type": "text",
+                                "label": "(U)"
+                            },
+                            {
+                                "name": "21",
+                                "type": "text",
+                                "label": "(V)"
+                            },
+                            {
+                                "name": "22",
+                                "type": "text",
+                                "label": "(W)"
+                            },
+                            {
+                                "name": "23",
+                                "type": "text",
+                                "label": "(X)"
+                            },
+                            {
+                                "name": "24",
+                                "type": "text",
+                                "label": "(Y)"
+                            },
+                            {
+                                "name": "25",
+                                "type": "text",
+                                "label": "(Z)"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": 8,
+            "module": "util:TextAggregator",
+            "version": 1,
+            "parameters": {
+                "rowSeparator": "",
+                "feeder": 4
+            },
+            "mapper": {
+                "value": "<!DOCTYPE html>\r\n<html>\r\n  <body style=\"font-family:Arial, sans-serif;\">\r\n    <h3>📅 {{4.`0`}}</h3>\r\n\r\n    <p>\r\n      <strong>Date:</strong> {{4.`1`}}<br>\r\n      <strong>Time:</strong> {{4.`2`}}<br>\r\n      <strong>Location:</strong> {{4.`3`}}\r\n    </p>\r\n\r\n    <p><em>{{4.`4`}}</em></p>\r\n\r\n    <img src=\"{{4.`5`}}\" alt=\"{{4.`0`}} flyer\"\r\n         style=\"max-width:75%; border-radius:12px; margin:15px 0;\">\r\n  </body>\r\n</html>\r\n"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 0
+                },
+                "restore": {
+                    "parameters": {
+                        "rowSeparator": {
+                            "label": "Empty"
+                        }
+                    },
+                    "extra": {
+                        "feeder": {
+                            "label": "Google Sheets - Search Rows [4]"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "rowSeparator",
+                        "type": "select",
+                        "label": "Row separator",
+                        "validate": {
+                            "enum": [
+                                "\n",
+                                "\t",
+                                "other"
+                            ]
+                        }
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "value",
+                        "type": "text",
+                        "label": "Text"
+                    }
+                ],
+                "advanced": true
+            }
+        },
+        {
+            "id": 9,
+            "module": "util:ComposeTransformer",
+            "version": 1,
+            "parameters": {},
+            "mapper": {
+                "value": "<!DOCTYPE html>\r\n<html>\r\n  <body style=\"font-family:Arial, sans-serif;\">\r\n    <p>Hello Club Members! 👋</p>\r\n\r\n    <p>Here are the upcoming events for this week:</p>\r\n\r\n    {{8.text}}\r\n\r\n    <p>We look forward to seeing you there!</p>\r\n\r\n    <p>Best regards,<br>\r\n    Lechongus Team</p>\r\n\r\n    <hr>\r\n    <p style=\"font-size:0.9em; color:#666;\">\r\n      Questions? Reply to this email or contact us at \r\n      <a href=\"mailto:lechongus@gmail.com\">lechongus@gmail.com</a>\r\n    </p>\r\n  </body>\r\n</html>\r\n"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 900,
+                    "y": 0
+                },
+                "restore": {},
+                "expect": [
+                    {
+                        "name": "value",
+                        "type": "text",
+                        "label": "Text"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 10,
+            "module": "google-email:ActionSendEmail",
+            "version": 2,
+            "parameters": {
+                "account": 5417164
+            },
+            "mapper": {
+                "from": "",
+                "to": [
+                    "mchau4@binghamton.edu"
+                ],
+                "subject": "📅 Upcoming Club Events This Week",
+                "html": "{{9.value}}",
+                "attachments": [],
+                "cc": [],
+                "bcc": []
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1200,
+                    "y": 0
+                },
+                "restore": {
+                    "parameters": {
+                        "account": {
+                            "label": "My Google Restricted connection (mchau4@binghamton.edu)",
+                            "data": {
+                                "scoped": "true",
+                                "connection": "google-restricted"
+                            }
+                        }
+                    },
+                    "expect": {
+                        "to": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        },
+                        "attachments": {
+                            "mode": "chose"
+                        },
+                        "cc": {
+                            "mode": "chose"
+                        },
+                        "bcc": {
+                            "mode": "chose"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "account",
+                        "type": "account:google-restricted",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "from",
+                        "type": "text",
+                        "label": "From"
+                    },
+                    {
+                        "name": "to",
+                        "type": "array",
+                        "label": "To",
+                        "required": true,
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address",
+                            "required": true
+                        }
+                    },
+                    {
+                        "name": "subject",
+                        "type": "text",
+                        "label": "Subject"
+                    },
+                    {
+                        "name": "html",
+                        "type": "text",
+                        "label": "Content"
+                    },
+                    {
+                        "name": "attachments",
+                        "type": "array",
+                        "label": "Attachments",
+                        "spec": [
+                            {
+                                "name": "fileName",
+                                "label": "File name",
+                                "type": "filename",
+                                "required": true,
+                                "semantic": "file:name"
+                            },
+                            {
+                                "name": "data",
+                                "label": "Data",
+                                "type": "buffer",
+                                "required": true,
+                                "semantic": "file:data"
+                            },
+                            {
+                                "name": "cid",
+                                "label": "Content-ID",
+                                "type": "text"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "cc",
+                        "type": "array",
+                        "label": "Copy recipient",
+                        "spec": {
+                            "type": "email",
+                            "label": "Email address",
+                            "name": "value"
+                        }
+                    },
+                    {
+                        "name": "bcc",
+                        "type": "array",
+                        "label": "Blind copy recipient",
+                        "spec": {
+                            "type": "email",
+                            "label": "Email address",
+                            "name": "value"
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "us2.make.com",
+        "notes": []
+    }
+}
